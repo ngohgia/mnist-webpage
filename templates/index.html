@@ -1,0 +1,27 @@
+<!doctype html>
+<link rel="stylesheet" type="text/css" href="../static/main.css">
+<title>MNIST classifier</title>
+
+<h1>MNIST classifier</h1>
+{% if filename %}
+  <div>
+    <img class="uploaded-img" src="{{ url_for('display_image', filename=filename) }}">
+  </div>
+{% endif %}
+
+<p>Upload the image of a digit then click Run</p>
+<form method=post enctype=multipart/form-data>
+  <input type=file name=file>
+  <input type=submit value=Run>
+</form>
+
+{% if pred %}
+  <p class="prediction">
+    Predicted digit
+    <h1>{{ pred }}</h1>
+  </p>
+{% endif %}
+
+{% for msg in get_flashed_messages() %}
+  <p class="error">{{ msg }}</p>
+{% endfor %}
